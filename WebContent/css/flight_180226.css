@@ -1,0 +1,16 @@
+/* 항공운임조건 셀렉트박스 */
+.promo_option_sel {}
+.promo_option_sel .title {float:left;margin-right:10px;line-height: 35px;}
+.promo_option_sel .sel_area {float:left;position:relative;width:200px;height:25px;margin-top: 5px;background:#fff;}
+.promo_option_sel .sel_area .txt {width:200px;height:25px;padding:0 10px;line-height:25px;background:#fff;border:1px solid #ccc;cursor:pointer}
+.promo_option_sel .sel_area .txt span {display:inline-block;width:180px;background:url(../images/flight_sel_arr.png) no-repeat right 10px;}
+.promo_option_sel .lists {position:absolute;top:24px;right:0;}
+.promo_option_sel .lists ul {border:1px solid #ccc;border-top:0;}
+.promo_option_sel .lists ul:after {content: ""; display: block; clear: both; visibility: hidden; width: 0; height: 0;}
+.promo_option_sel .lists ul li {position: relative;z-index: 1;width:198px;height:25px;padding:0 10px 0 6px;background:#fff;border-top:1px solid #ccc;}
+.promo_option_sel .lists ul li input[type="checkbox"].promo_chk {opacity:0;position: relative;left: 0px;top: 0;width: 18px;height: 18px;}
+.promo_option_sel .lists ul li input[type="checkbox"].promo_chk + label {z-index: 1;display:inline-block;position: relative;left: -18px;top:-4px;height:18px;line-height:18px;padding-left: 19px;background:url(images/flight_chk_on_off.png) no-repeat 0 0;cursor: pointer;}
+.promo_option_sel .lists ul li.on input[type="checkbox"].promo_chk + label {background:url(../images/flight_chk_on_off.png) no-repeat 0 -40px;}
+@media \0screen {
+    .promo_option_sel .lists ul li input[type="checkbox"].promo_chk {width:14px;}
+}

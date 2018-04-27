@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+	<Appenders>
+
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="[%-5level %d{yyyy/MM/dd HH:mm:ss.SSS}] %msg%n" />
+		</Console>
+
+		<RollingFile name="COMMON" fileName="/svc/fareCompare.hanatour.com/log/today.log"
+			filePattern="/svc/mglobalflight.hanatour.com/log/common/%d{yyyyMMdd}.gz">
+			<PatternLayout>
+				<Pattern>[%-5level %d{yyyy/MM/dd HH:mm:ss.SSS}] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy interval="1"
+					modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="90" />
+		</RollingFile>
+
+		<Async name="ASYNC_COMMON" includeLocation="true">
+			<AppenderRef ref="COMMON" />
+			<AppenderRef ref="CONSOLE" />
+		</Async>
+
+	</Appenders>
+
+	<Loggers>
+	    <!-- 
+	    <logger name="jdbc.connection" additivity="false">
+	        <level value="WARN"/>
+	        <appender-ref ref="CONSOLE"/>
+	    </logger>
+	    <logger name="jdbc.sqlonly" additivity="false">
+	        <level value="WARN"/>
+	        <appender-ref ref="CONSOLE"/>
+	    </logger>
+	    <logger name="jdbc.resultset" additivity="false">
+	        <level value="WARN"/>
+	        <appender-ref ref="CONSOLE"/>
+	    </logger>
+	     
+	    <logger name="jdbc.resultsettable" additivity="false">
+	        <level value="INFO"/>
+	        <appender-ref ref="CONSOLE"/>
+	    </logger>
+		 -->
+		<Logger name="COMMONLOGGER" level="DEBUG" additivity="false">
+			<AppenderRef ref="ASYNC_COMMON" />
+		</Logger>
+
+		<Logger name="REVPAYLOGGER" level="DEBUG" additivity="false">
+			<AppenderRef ref="REVPAY" />
+			<AppenderRef ref="CONSOLE" />
+		</Logger>
+		
+		<Root level="DEBUG" additivity="false">
+			<AppenderRef ref="CONSOLE" />
+		</Root>
+	</Loggers>
+
+</Configuration>    

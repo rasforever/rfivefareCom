@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Fare">
+    <insert id="insertFare" parameterType="com.hanatour.fareCompare.model.CommonFareVo">
+		INSERT INTO fareinfo(
+			SCH_NUM, SCH_SEQ, MASTER_SITE_CD , SITE_CD , DEP_APO , RTN_APO, DEP_DT , RTN_DT , AIR_CD , AIR_NM 
+			, DEP_FLT_NO , RTN_FLT_NO , OIL_FEE , TAX_FEE , TASF_FEE , FARE_ADT , FARE_DIS
+			,FARE_NOMAL , FARE_NETT , VIA_CNT , EXP_DT , PROMOTION_NM , REG_DATE
+		)VALUES(
+			#{Sch_Num}, #{Sch_Seq}, #{Master_SiteCd} , #{SiteCd} , #{Dep_Apo} , #{Rtn_Apo} , #{Dep_Dt} , #{Rtn_Dt}
+			, #{MkAirCd} , #{MkAirNm} , #{Dep_FltNo} , #{Rtn_FltNo} , #{Oil} , #{Tax} , #{Tasf}
+			, #{Price} , #{DisFare} , #{Fare} , #{Nett} , #{ViaCnt} , #{Exp_Dt} , #{Promo_Nm} , now()
+		)	
+	</insert>
+	<select id="selectFare" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+			DEP_APO, RTN_APO, DEP_DT, RTN_DT, O_FARE.AIR_CD ,PROMOTION_NM
+			, CASE WHEN O_FARE.OIL_FEE > 0 then O_FARE.OIL_FEE else IFNULL (T_FARE.OIL_FEE, 0) end AS OIL_FEE
+			, CASE WHEN O_FARE.TAX_FEE > 0 then O_FARE.TAX_FEE else IFNULL (T_FARE.TAX_FEE, 0) end AS TAX_FEE
+			, CASE WHEN O_FARE.H_FARE_NOMAL > 0 then O_FARE.H_FARE_NOMAL else IFNULL (T_FARE.FARE_NOMAL, 0) end AS FARE_NETT
+			,H_FARE_NOMAL , H_FARE_DIS, H_FARE , H_DEP_FLT_NO, H_RTN_FLT_NO , H_VIA_CNT , H_EXP_DT
+			,M_FARE_NOMAL , M_FARE_DIS, H_FARE , M_DEP_FLT_NO, M_RTN_FLT_NO , M_VIA_CNT , M_EXP_DT
+			,I_FARE_NOMAL , I_FARE_DIS, I_FARE , I_DEP_FLT_NO, I_RTN_FLT_NO , I_VIA_CNT , I_EXP_DT
+			,O_FARE_NOMAL , O_FARE_DIS, O_FARE , O_DEP_FLT_NO, O_RTN_FLT_NO , O_VIA_CNT , O_EXP_DT
+			, REG_DATE
+		from
+		(
+	    
+		    select 
+	 			DEP_APO, RTN_APO, DEP_DT, RTN_DT, AIR_CD , PROMOTION_NM, MAX(H_OIL_FEE) OIL_FEE , MAX(H_TAX_FEE) TAX_FEE, MAX(H_FARE_NETT) FARE_NETT
+				, MAX(H_FARE_NOMAL) H_FARE_NOMAL, MAX(H_FARE_DIS) H_FARE_DIS, MAX(H_FARE) H_FARE, MAX(H_DEP_FLT_NO) H_DEP_FLT_NO, MAX(H_RTN_FLT_NO) H_RTN_FLT_NO
+				, MAX(H_VIA_CNT) H_VIA_CNT , MAX(H_EXP_DT) H_EXP_DT
+				
+				, MAX(M_FARE_NOMAL) M_FARE_NOMAL, MAX(M_FARE_DIS) M_FARE_DIS, MAX(M_FARE) M_FARE, MAX(M_DEP_FLT_NO) M_DEP_FLT_NO , MAX(M_RTN_FLT_NO) M_RTN_FLT_NO
+				, MAX(M_VIA_CNT) M_VIA_CNT , MAX(M_EXP_DT) M_EXP_DT
+				
+				, MAX(I_FARE_NOMAL) I_FARE_NOMAL, MAX(I_FARE_DIS) I_FARE_DIS , MAX(I_FARE) I_FARE, MAX(I_DEP_FLT_NO) I_DEP_FLT_NO , MAX(I_RTN_FLT_NO) I_RTN_FLT_NO 
+				, MAX(I_VIA_CNT) I_VIA_CNT , MAX(I_EXP_DT) I_EXP_DT
+				
+				, MAX(O_FARE_NOMAL) O_FARE_NOMAL, MAX(O_FARE_DIS) O_FARE_DIS , MAX(O_FARE) O_FARE, MAX(O_DEP_FLT_NO) O_DEP_FLT_NO , MAX(O_RTN_FLT_NO) O_RTN_FLT_NO
+				, MAX(O_VIA_CNT) O_VIA_CNT , MAX(O_EXP_DT) O_EXP_DT  
+				, DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i:%s') AS REG_DATE
+			from 
+			(
+				select
+					DEP_APO
+					,RTN_APO
+					,DEP_DT
+					,RTN_DT
+					,AIR_CD
+					, PROMOTION_NM
+					, CASE WHEN SITE_CD = 'hanatour' then OIL_FEE else '0' end AS H_OIL_FEE
+					, CASE WHEN SITE_CD = 'hanatour' then TAX_FEE else '0' end AS H_TAX_FEE
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_NETT else '0' end AS H_FARE_NETT
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_NOMAL else '0' end AS H_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_DIS else '0' end AS H_FARE_DIS
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_ADT else '0' end AS H_FARE
+					, CASE WHEN SITE_CD = 'hanatour' then DEP_FLT_NO else '0' end AS H_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'hanatour' then RTN_FLT_NO else '0' end AS H_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'hanatour' then VIA_CNT else '0' end AS H_VIA_CNT
+					, CASE WHEN SITE_CD = 'hanatour' then EXP_DT else '0' end AS H_EXP_DT
+					
+					, CASE WHEN SITE_CD = 'modetour' then FARE_NOMAL else '0' end AS M_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'modetour' then FARE_DIS else '0' end AS M_FARE_DIS
+					, CASE WHEN SITE_CD = 'modetour' then FARE_ADT else '0' end AS M_FARE
+					, CASE WHEN SITE_CD = 'modetour' then DEP_FLT_NO else '0' end AS M_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'modetour' then RTN_FLT_NO else '0' end AS M_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'modetour' then VIA_CNT else '0' end AS M_VIA_CNT
+					, CASE WHEN SITE_CD = 'modetour' then EXP_DT else '0' end AS M_EXP_DT
+					
+					, CASE WHEN SITE_CD = 'interpark' then FARE_NOMAL else '0' end AS I_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'interpark' then FARE_DIS else '0' end AS I_FARE_DIS
+					, CASE WHEN SITE_CD = 'interpark' then FARE_ADT else '0' end AS I_FARE
+					, CASE WHEN SITE_CD = 'interpark' then DEP_FLT_NO else '0' end AS I_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'interpark' then RTN_FLT_NO else '0' end AS I_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'interpark' then VIA_CNT else '0' end AS I_VIA_CNT
+					, CASE WHEN SITE_CD = 'interpark' then EXP_DT else '0' end AS I_EXP_DT
+					
+					, CASE WHEN SITE_CD = 'onlinetour' then FARE_NOMAL else '0' end AS O_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'onlinetour' then FARE_DIS else '0' end AS O_FARE_DIS
+					, CASE WHEN SITE_CD = 'onlinetour' then FARE_ADT else '0' end AS O_FARE
+					, CASE WHEN SITE_CD = 'onlinetour' then DEP_FLT_NO else '0' end AS O_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'onlinetour' then RTN_FLT_NO else '0' end AS O_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'onlinetour' then VIA_CNT else '0' end AS O_VIA_CNT
+					, CASE WHEN SITE_CD = 'onlinetour' then EXP_DT else '0' end AS O_EXP_DT
+					, REG_DATE
+				from fareinfo
+				where DEP_DT = #{dep_dt} AND RTN_DT = #{rtn_dt}
+				AND DEP_APO = #{dep_apo} AND RTN_APO = #{rtn_apo}
+				AND SCH_NUM = #{sch_num}
+			) AS FARE 
+			group by AIR_CD, FARE.PROMOTION_NM
+			order by AIR_CD
+		)AS O_FARE left JOIN (
+			select OIL_FEE, TAX_FEE , FARE_NOMAL , AIR_CD 
+			from fareinfo 
+			where DEP_DT = #{dep_dt} AND RTN_DT = #{rtn_dt}
+				AND DEP_APO = #{dep_apo} AND RTN_APO = #{rtn_apo}
+				AND SCH_NUM = #{sch_num}
+				AND PROMOTION_NM = '성인'
+				AND SITE_CD = 'hanatour'
+			) AS T_FARE ON O_FARE.AIR_CD = T_FARE.AIR_CD
+ 	</select>
+ 	
+	<!-- <select id="selectFare_sch_num"  resultType="string">
+ 		select IFNULL(Max(SCH_NUM), 0)+1 AS SCH_NUM from fareinfo 
+ 	</select> -->
+ 	
+	<select id="selectFare_nvl_sch_num" parameterType="java.util.HashMap" resultType="string">
+ 		select IFNULL(Max(SCH_NUM), 0)+1 AS SCH_NUM from fareinfo 
+ 		<if test="sch_seq != ''">
+			WHERE SCH_SEQ =#{sch_seq}
+		</if>
+ 	</select>
+ 	
+	<select id="selectFare_max_sch_num" parameterType="java.util.HashMap" resultType="string">
+ 		select IFNULL(Max(SCH_NUM), 0) AS SCH_NUM from fareinfo 
+ 		<if test="sch_seq != ''">
+			WHERE SCH_SEQ =#{sch_seq}
+		</if>
+ 	</select>
+ 	
+	<!-- 룰별 수집운임데이터 조회 -->
+	<select id="selectCollectFare" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+ 			DEP_APO, RTN_APO, DEP_DT, RTN_DT, AIR_CD , PROMOTION_NM, MAX(H_OIL_FEE) OIL_FEE , MAX(H_TAX_FEE) TAX_FEE, MAX(H_FARE_NETT) FARE_NETT
+			, MAX(H_FARE_NOMAL) H_FARE_NOMAL, MAX(H_FARE_DIS) H_FARE_DIS, MAX(H_FARE) H_FARE, MAX(H_DEP_FLT_NO) H_DEP_FLT_NO, MAX(H_RTN_FLT_NO) H_RTN_FLT_NO
+			, MAX(H_VIA_CNT) H_VIA_CNT , MAX(H_EXP_DT) H_EXP_DT
+			
+			, MAX(M_FARE_NOMAL) M_FARE_NOMAL, MAX(M_FARE_DIS) M_FARE_DIS, MAX(M_FARE) M_FARE, MAX(M_DEP_FLT_NO) M_DEP_FLT_NO , MAX(M_RTN_FLT_NO) M_RTN_FLT_NO
+			, MAX(M_VIA_CNT) M_VIA_CNT , MAX(M_EXP_DT) M_EXP_DT
+			
+			, MAX(I_FARE_NOMAL) I_FARE_NOMAL, MAX(I_FARE_DIS) I_FARE_DIS , MAX(I_FARE) I_FARE, MAX(I_DEP_FLT_NO) I_DEP_FLT_NO , MAX(I_RTN_FLT_NO) I_RTN_FLT_NO 
+			, MAX(I_VIA_CNT) I_VIA_CNT , MAX(I_EXP_DT) I_EXP_DT
+			
+			, MAX(O_FARE_NOMAL) O_FARE_NOMAL, MAX(O_FARE_DIS) O_FARE_DIS , MAX(O_FARE) O_FARE, MAX(O_DEP_FLT_NO) O_DEP_FLT_NO , MAX(O_RTN_FLT_NO) O_RTN_FLT_NO
+			, MAX(O_VIA_CNT) O_VIA_CNT , MAX(O_EXP_DT) O_EXP_DT  
+			, DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i:%s') AS REG_DATE
+		from 
+		(
+			select
+				DEP_APO
+				,RTN_APO
+				,DEP_DT
+				,RTN_DT
+				,AIR_CD
+				, PROMOTION_NM
+				, CASE WHEN SITE_CD = 'hanatour' then OIL_FEE else '0' end AS H_OIL_FEE
+				, CASE WHEN SITE_CD = 'hanatour' then TAX_FEE else '0' end AS H_TAX_FEE
+				, CASE WHEN SITE_CD = 'hanatour' then FARE_NETT else '0' end AS H_FARE_NETT
+				, CASE WHEN SITE_CD = 'hanatour' then FARE_NOMAL else '0' end AS H_FARE_NOMAL
+				, CASE WHEN SITE_CD = 'hanatour' then FARE_DIS else '0' end AS H_FARE_DIS
+				, CASE WHEN SITE_CD = 'hanatour' then FARE_ADT else '0' end AS H_FARE
+				, CASE WHEN SITE_CD = 'hanatour' then DEP_FLT_NO else '0' end AS H_DEP_FLT_NO
+				, CASE WHEN SITE_CD = 'hanatour' then RTN_FLT_NO else '0' end AS H_RTN_FLT_NO
+				, CASE WHEN SITE_CD = 'hanatour' then VIA_CNT else '0' end AS H_VIA_CNT
+				, CASE WHEN SITE_CD = 'hanatour' then EXP_DT else '0' end AS H_EXP_DT
+				
+				, CASE WHEN SITE_CD = 'modetour' then FARE_NOMAL else '0' end AS M_FARE_NOMAL
+				, CASE WHEN SITE_CD = 'modetour' then FARE_DIS else '0' end AS M_FARE_DIS
+				, CASE WHEN SITE_CD = 'modetour' then FARE_ADT else '0' end AS M_FARE
+				, CASE WHEN SITE_CD = 'modetour' then DEP_FLT_NO else '0' end AS M_DEP_FLT_NO
+				, CASE WHEN SITE_CD = 'modetour' then RTN_FLT_NO else '0' end AS M_RTN_FLT_NO
+				, CASE WHEN SITE_CD = 'modetour' then VIA_CNT else '0' end AS M_VIA_CNT
+				, CASE WHEN SITE_CD = 'modetour' then EXP_DT else '0' end AS M_EXP_DT
+				
+				, CASE WHEN SITE_CD = 'interpark' then FARE_NOMAL else '0' end AS I_FARE_NOMAL
+				, CASE WHEN SITE_CD = 'interpark' then FARE_DIS else '0' end AS I_FARE_DIS
+				, CASE WHEN SITE_CD = 'interpark' then FARE_ADT else '0' end AS I_FARE
+				, CASE WHEN SITE_CD = 'interpark' then DEP_FLT_NO else '0' end AS I_DEP_FLT_NO
+				, CASE WHEN SITE_CD = 'interpark' then RTN_FLT_NO else '0' end AS I_RTN_FLT_NO
+				, CASE WHEN SITE_CD = 'interpark' then VIA_CNT else '0' end AS I_VIA_CNT
+				, CASE WHEN SITE_CD = 'interpark' then EXP_DT else '0' end AS I_EXP_DT
+				
+				, CASE WHEN SITE_CD = 'onlinetour' then FARE_NOMAL else '0' end AS O_FARE_NOMAL
+				, CASE WHEN SITE_CD = 'onlinetour' then FARE_DIS else '0' end AS O_FARE_DIS
+				, CASE WHEN SITE_CD = 'onlinetour' then FARE_ADT else '0' end AS O_FARE
+				, CASE WHEN SITE_CD = 'onlinetour' then DEP_FLT_NO else '0' end AS O_DEP_FLT_NO
+				, CASE WHEN SITE_CD = 'onlinetour' then RTN_FLT_NO else '0' end AS O_RTN_FLT_NO
+				, CASE WHEN SITE_CD = 'onlinetour' then VIA_CNT else '0' end AS O_VIA_CNT
+				, CASE WHEN SITE_CD = 'onlinetour' then EXP_DT else '0' end AS O_EXP_DT
+				, REG_DATE
+			from fareinfo
+			where SCH_SEQ = #{sch_seq}
+			AND SCH_NUM = #{sch_num}
+			<if test="air_cd != ''">
+				AND AIR_CD =#{air_cd}
+			</if>
+			<if test="promo_nm != ''">
+				AND PROMOTION_NM = #{promo_nm}
+			</if>
+		) AS FARE 
+		group by AIR_CD, FARE.PROMOTION_NM
+		order by AIR_CD
+ 	</select>
+ 	
+	
+	<!-- 룰별 수집운임데이터 조회 -->
+	<select id="selectCollectFare2" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+			DEP_APO, RTN_APO, DEP_DT, RTN_DT, O_FARE.AIR_CD, PROMOTION_NM
+			, CASE WHEN O_FARE.OIL_FEE > 0 then O_FARE.OIL_FEE else IFNULL (T_FARE.OIL_FEE, 0) end AS OIL_FEE
+			, CASE WHEN O_FARE.TAX_FEE > 0 then O_FARE.TAX_FEE else IFNULL (T_FARE.TAX_FEE, 0) end AS TAX_FEE
+			, CASE WHEN O_FARE.H_FARE_NOMAL > 0 then O_FARE.H_FARE_NOMAL else IFNULL (T_FARE.FARE_NOMAL, 0) end AS FARE_NETT
+			,H_FARE_NOMAL , H_FARE_DIS, H_FARE , H_DEP_FLT_NO, H_RTN_FLT_NO , H_VIA_CNT , H_EXP_DT
+			,M_FARE_NOMAL , M_FARE_DIS, H_FARE , M_DEP_FLT_NO, M_RTN_FLT_NO , M_VIA_CNT , M_EXP_DT
+			,I_FARE_NOMAL , I_FARE_DIS, I_FARE , I_DEP_FLT_NO, I_RTN_FLT_NO , I_VIA_CNT , I_EXP_DT
+			,O_FARE_NOMAL , O_FARE_DIS, O_FARE , O_DEP_FLT_NO, O_RTN_FLT_NO , O_VIA_CNT , O_EXP_DT
+			, REG_DATE
+		from
+		(
+		    select 
+	 			DEP_APO, RTN_APO, DEP_DT, RTN_DT, AIR_CD , PROMOTION_NM, MAX(H_OIL_FEE) OIL_FEE , MAX(H_TAX_FEE) TAX_FEE, MAX(H_FARE_NETT) FARE_NETT
+				, MAX(H_FARE_NOMAL) H_FARE_NOMAL, MAX(H_FARE_DIS) H_FARE_DIS, MAX(H_FARE) H_FARE, MAX(H_DEP_FLT_NO) H_DEP_FLT_NO, MAX(H_RTN_FLT_NO) H_RTN_FLT_NO
+				, MAX(H_VIA_CNT) H_VIA_CNT , MAX(H_EXP_DT) H_EXP_DT
+				
+				, MAX(M_FARE_NOMAL) M_FARE_NOMAL, MAX(M_FARE_DIS) M_FARE_DIS, MAX(M_FARE) M_FARE, MAX(M_DEP_FLT_NO) M_DEP_FLT_NO , MAX(M_RTN_FLT_NO) M_RTN_FLT_NO
+				, MAX(M_VIA_CNT) M_VIA_CNT , MAX(M_EXP_DT) M_EXP_DT
+				
+				, MAX(I_FARE_NOMAL) I_FARE_NOMAL, MAX(I_FARE_DIS) I_FARE_DIS , MAX(I_FARE) I_FARE, MAX(I_DEP_FLT_NO) I_DEP_FLT_NO , MAX(I_RTN_FLT_NO) I_RTN_FLT_NO 
+				, MAX(I_VIA_CNT) I_VIA_CNT , MAX(I_EXP_DT) I_EXP_DT
+				
+				, MAX(O_FARE_NOMAL) O_FARE_NOMAL, MAX(O_FARE_DIS) O_FARE_DIS , MAX(O_FARE) O_FARE, MAX(O_DEP_FLT_NO) O_DEP_FLT_NO , MAX(O_RTN_FLT_NO) O_RTN_FLT_NO
+				, MAX(O_VIA_CNT) O_VIA_CNT , MAX(O_EXP_DT) O_EXP_DT  
+				, DATE_FORMAT(REG_DATE, '%Y/%m/%d %H:%i:%s') AS REG_DATE
+			from 
+			(
+				select
+					DEP_APO
+					,RTN_APO
+					,DEP_DT
+					,RTN_DT
+					,AIR_CD
+					, PROMOTION_NM
+					, CASE WHEN SITE_CD = 'hanatour' then OIL_FEE else '0' end AS H_OIL_FEE
+					, CASE WHEN SITE_CD = 'hanatour' then TAX_FEE else '0' end AS H_TAX_FEE
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_NETT else '0' end AS H_FARE_NETT
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_NOMAL else '0' end AS H_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_DIS else '0' end AS H_FARE_DIS
+					, CASE WHEN SITE_CD = 'hanatour' then FARE_ADT else '0' end AS H_FARE
+					, CASE WHEN SITE_CD = 'hanatour' then DEP_FLT_NO else '0' end AS H_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'hanatour' then RTN_FLT_NO else '0' end AS H_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'hanatour' then VIA_CNT else '0' end AS H_VIA_CNT
+					, CASE WHEN SITE_CD = 'hanatour' then EXP_DT else '0' end AS H_EXP_DT
+					
+					, CASE WHEN SITE_CD = 'modetour' then FARE_NOMAL else '0' end AS M_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'modetour' then FARE_DIS else '0' end AS M_FARE_DIS
+					, CASE WHEN SITE_CD = 'modetour' then FARE_ADT else '0' end AS M_FARE
+					, CASE WHEN SITE_CD = 'modetour' then DEP_FLT_NO else '0' end AS M_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'modetour' then RTN_FLT_NO else '0' end AS M_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'modetour' then VIA_CNT else '0' end AS M_VIA_CNT
+					, CASE WHEN SITE_CD = 'modetour' then EXP_DT else '0' end AS M_EXP_DT
+					
+					, CASE WHEN SITE_CD = 'interpark' then FARE_NOMAL else '0' end AS I_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'interpark' then FARE_DIS else '0' end AS I_FARE_DIS
+					, CASE WHEN SITE_CD = 'interpark' then FARE_ADT else '0' end AS I_FARE
+					, CASE WHEN SITE_CD = 'interpark' then DEP_FLT_NO else '0' end AS I_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'interpark' then RTN_FLT_NO else '0' end AS I_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'interpark' then VIA_CNT else '0' end AS I_VIA_CNT
+					, CASE WHEN SITE_CD = 'interpark' then EXP_DT else '0' end AS I_EXP_DT
+					
+					, CASE WHEN SITE_CD = 'onlinetour' then FARE_NOMAL else '0' end AS O_FARE_NOMAL
+					, CASE WHEN SITE_CD = 'onlinetour' then FARE_DIS else '0' end AS O_FARE_DIS
+					, CASE WHEN SITE_CD = 'onlinetour' then FARE_ADT else '0' end AS O_FARE
+					, CASE WHEN SITE_CD = 'onlinetour' then DEP_FLT_NO else '0' end AS O_DEP_FLT_NO
+					, CASE WHEN SITE_CD = 'onlinetour' then RTN_FLT_NO else '0' end AS O_RTN_FLT_NO
+					, CASE WHEN SITE_CD = 'onlinetour' then VIA_CNT else '0' end AS O_VIA_CNT
+					, CASE WHEN SITE_CD = 'onlinetour' then EXP_DT else '0' end AS O_EXP_DT
+					, REG_DATE
+				from fareinfo
+				where SCH_SEQ = #{sch_seq}
+				AND SCH_NUM = #{sch_num}
+				<if test="air_cd != ''">
+					AND AIR_CD =#{air_cd}
+				</if>
+				<choose>
+		            <when test="promo_list.size != 0">
+		                AND PROMOTION_NM IN
+		                <foreach collection="promo_list" item="item" index="index" separator="," open="(" close=")">
+		                    #{item}
+		                </foreach>
+		            </when>
+		        </choose>
+		        <!-- 
+				<if test="promo_nm != ''">
+					AND PROMOTION_NM = #{promo_nm}
+				</if>
+				 -->
+			) AS FARE 
+			group by AIR_CD, FARE.PROMOTION_NM
+			order by AIR_CD
+		) AS O_FARE left JOIN (
+			select OIL_FEE, TAX_FEE , FARE_NOMAL , AIR_CD 
+			from fareinfo 
+			where SCH_SEQ = #{sch_seq}
+				AND SCH_NUM = #{sch_num}
+				AND PROMOTION_NM = '성인'
+				AND SITE_CD = 'hanatour'
+			) AS T_FARE ON O_FARE.AIR_CD = T_FARE.AIR_CD
+ 	</select>
+	
+	<!-- 룰별 수집운임데이터 항공사 목록 조회 -->
+	<select id="selectAirList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+ 			AIR_CD
+		from FAREINFO
+		where SCH_SEQ = #{sch_seq}
+		AND SCH_NUM = #{sch_num}
+		group by AIR_CD
+		order by AIR_CD
+ 	</select>
+ 	
+	<!-- 룰별 수집운임데이터 프로모션 그룹 목록 조회 -->
+	<select id="selectPromotionList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+ 			PROMOTION_NM
+		from FAREINFO
+		where SCH_SEQ = #{sch_seq}
+		AND SCH_NUM = #{sch_num}
+		group by PROMOTION_NM
+		order by PROMOTION_NM
+ 	</select>
+</mapper>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>HNT FARE</title>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" type="text/css" href="css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="css/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="css/jPicker-1.1.6.min.css">
+<link rel="stylesheet" type="text/css" href="css/jPicker.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+
+<!-- js -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<!-- <script src="js/bootstrap.min.js"></script> -->
+<!--[if lt IE 10]>
+<script src="js/html5.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body ><a href="#content" class="skip sr-only sr-only-focusable" onclick="jQuery('#content a:first').focus();return false;">Skip to Content</a>
+
+<!-- wrap -->
+<div id="wrap">
+	<!-- side -->
+	<div id="side">
+		<!-- account -->
+		<section class="account">
+			<h1 class="sr-only">account</h1>
+			<div>
+				<i class="icon-user"></i> User ID <i class="split"></i> <strong class="user">H2501</strong>
+			</div>
+		</section>
+		<!-- gnb -->
+		<nav id="gnb">
+			<h1 class="sr-only">Global Navigation Bar</h1>
+			<ul>
+				<li class="gnb1">
+					<h2>CODE MANAGEMENT</h2>
+					<ul>
+						<li><a class="i1" href="t03.html">Airline code</a></li>
+						<li><a class="i2" href="t04.html">Country code</a></li>
+						<li><a class="i3" href="t05.html">States code</a></li>
+						<li><a class="i4" href="t06.html">City code</a></li>
+						<li><a class="i5" href="t07.html">Airport code</a></li>
+						<li><a class="i6" href="t08.html">Region code</a></li>
+						<li><a class="i7" href="t09.html">Region-country connetion</a></li>
+					</ul>
+				</li>
+				<li class="gnb2">
+					<h2>SITE SETTING</h2>
+					<ul>
+						<li><a class="i1" href="t10.html">TL management</a></li>
+						<li><a class="i2" href="t11.html">Booking available date</a></li>
+						<li><a class="i3" href="t12.html">Rule management</a></li>
+						<li><a class="i4" href="t13.html">Fee management</a></li>
+						<li><a class="i5" href="t14.html">Site management</a></li>
+						<li><a class="i6" href="t15.html">Site GRP management</a></li>
+					</ul>
+				</li>
+				<li class="gnb3">
+					<h2>FARE MANAGEMENT</h2>
+					<ul>
+						<!--<li><a class="i1" href="t15.html">Commission management</a></li>-->
+						<li><a class="i2" href="t16.html">Fare management</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<!-- //side -->
+
+	<!-- container -->
+	<div id="container">
+		<!-- header -->
+		<header id="hd">
+			<a id="sideTg" class="icon-mn" href="#side" onClick="$('body').toggleClass('gnb_fold');return false;">sidebar open/close</a>
+			<h1><img class="hidden-xs" src="img/logo2.png" alt=""><img class="visible-xs" src="img/logo_m.png" alt=""><span class="sr-only">HNT FARE</span></h1>
+			<a class="icon-logout" href="#sid">logout</a>
+		</header>
+		<!-- //header -->
+		<!-- breadcrumb -->
+		<ul class="breadcrumb">
+			<li><strong>Fare management</strong></li>
+			<li class="active">Fare management</li>
+		</ul>
+		<!-- //breadcrumb -->
+		<!-- content -->
+		<div id="content">
+			<!-- 입력 -->
+			<div class="bx">
+				<form class="row form-horizontal">
+					<div class="col-sm-8">
+						<div class="form-group">
+							<label for="" class="col-sm-2 col-xs-3 control-label">TITLE</label>
+							<span class="col-sm-10 col-xs-9"><input type="text" class="form-control"></span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="" class="col-xs-3 control-label">Carrier</label>
+							<span class="col-xs-9"><input type="text" class="form-control w60 text-center"></span>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="" class="col-sm-4 col-xs-3 control-label">Fare Type</label>
+							<div class="col-sm-8 col-xs-9">
+								<label class="checkbox-inline">
+									<input type="checkbox" checked> RT
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox"> OW
+								</label>
+								<label class="checkbox-inline">
+									<input type="checkbox"> Open Jaw
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="" class="col-sm-5 col-xs-3 control-label">Site GRP code</label>
+							<div class="col-sm-7 col-xs-9">
+								<select class="form-control" style="width:100%">
+									<option></option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-4">
+						<div class="form-group">
+							<label for="" class="col-sm-3 col-xs-3 control-label">Open</label>
+							<div class="col-sm-9 col-xs-9 form-inline">
+								<select class="form-control w60">
+									<option>Y</option>
+								</select>
+								<button type="button" class="btn bg-mint">SAVE</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- 입력 -->
+			<div class="tb-style2">
+				<form>
+					<div class="row">
+						<div class="col-sm-6 form-group">
+							<h4 class="col-xs-12"><span>Depart Include</span></h4>
+							<!-- [D] 해당영역은 시안처럼 각 코드를 선택하면 아래쪽으로 색상이 반영되어야하는 부분입니다  -->
+							<div class="row">
+								<span class="col-xs-3">
+									<label for="">TC,Region Code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="TC1, TC2">
+										<ul style="display:block">
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-3">
+									<label for="">Country code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="KR">
+										<ul style="display:block">
+											<li><a href="#"><b style="background:#ffed99">CC</b> KOREA</a></li>
+											<li><a href="#"><b style="background:#daedf3">RC</b> EUROPE</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-6">
+									<label for="">City,Airport <div class="m_enter1"></div>code</label>
+									<input type="text" class="form-control" placeholder="e.g. KIX/NRT">
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-6 form-group">
+							<h4 class="col-xs-12"><span>Depart Exclude</span></h4>
+							<div class="row">
+								<span class="col-xs-3">
+									<label for="">TC,Region Code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="TC1, TC2">
+										<ul>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-3">
+									<label for="">Country code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="KR">
+										<ul>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-6">
+									<label for="">City,Airport <div class="m_enter1"></div>code</label>
+									<input type="text" class="form-control" placeholder="e.g. KIX/NRT">
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-6 form-group">
+							<h4 class="col-xs-12"><span>Arrival Include</span></h4>
+							<div class="row">
+								<span class="col-xs-3">
+									<label for="">TC,Region Code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="TC1, TC2">
+										<ul>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-3">
+									<label for="">Country code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="KR">
+										<ul>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-6">
+									<label for="">City,Airport <div class="m_enter1"></div>code</label>
+									<input type="text" class="form-control" placeholder="e.g. KIX/NRT">
+								</span>
+							</div>
+						</div>
+						<div class="col-sm-6 form-group">
+							<h4 class="col-xs-12"><span>Arrival Exclude</span></h4>
+							<div class="row">
+								<span class="col-xs-3">
+									<label for="">TC,Region Code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="TC1, TC2">
+										<ul>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-3">
+									<label for="">Country code</label>
+									<div class="region_code">
+										<input type="text" class="form-control" value="KR">
+										<ul>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC1</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC2</a></li>
+											<li><a href="#"><b style="background:#d1e9ff">TC</b> TC3</a></li>
+										</ul>
+									</div>
+								</span>
+								<span class="col-xs-6">
+									<label for="">City,Airport <div class="m_enter1"></div>code</label>
+									<input type="text" class="form-control" placeholder="e.g. KIX/NRT">
+								</span>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- 입력 -->
+			<div class="tb-style3">
+				<form>
+					<!-- Depart -->
+					<div class="row">
+						<!--
+						<div class="col-sm-6 form-group">
+							<div class="row">
+								<h4 class="col-xs-12 clude-hd"><span>Depart Exclude</span></h4>
+								<span class="col-xs-6">
+									<label for="">Travel from</label>
+									<input type="text" class="form-control">
+								</span>
+								<span class="col-xs-6">
+									<label for="">Travel to</label>
+									<input type="text" class="form-control">
+								</span>
+								<div class="col-xs-12">
+									<label class="checkbox-inline">
+										<input type="checkbox"> Add Arrival
+									</label>
+									<div class="btn-bx">
+										<button type="button"><i class="glyphicon glyphicon-minus"></i><span class="sr-only">삭제</span></button>
+										<button type="button"><i class="glyphicon glyphicon-plus"></i><span class="sr-only">추가</span></button>
+									</div>
+								</div>
+							</div>
+						</div>
+						-->
+						<!-- 인클루드 -->
+						<div class="col-sm-6 form-group">
+							<!-- 추가단위 -->
+							<div class="clude-item clearfix">
+								<h4 class="clude-hd"><span style="background:#daedf3">Depart Include</span></h4>
+								<div class="input-bx">
+									<div class="input-daterange input-group">
+                                        <label for="" class="fs10">Travel from</label>
+										<input type="text" class="input-sm form-control" name="" />
+										<span class="input-group-addon pt20">~</span>
+                                        <label for="" class="fs10">Travel to</label>
+										<input type="text" class="input-sm form-control" name="" />
+									</div>
+								</div>
+								<div class="btn-bx">
+									<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+									<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+								</div>
+							</div>
+							<div class="pt10">
+								<label class="checkbox-inline">
+									<input type="checkbox"> Add Arrival
+								</label>
+							</div>
+							<!-- Add Arrival 체크시 -->
+							<!-- 추가단위 -->
+							<div class="clude-item clearfix">
+								<h4 class="clude-hd"><span style="background:#daedf3">Arrival Include</span></h4>
+								<div class="input-bx">
+									<div class="input-daterange input-group">
+                                        <label for="" class="fs10">Travel from</label>
+										<input type="text" class="input-sm form-control" name="" />
+										<span class="input-group-addon pt20">~</span>
+                                        <label for="" class="fs10">Travel to</label>
+										<input type="text" class="input-sm form-control" name="" />
+									</div>
+								</div>
+								<div class="btn-bx">
+									<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+									<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+								</div>
+							</div>
+						</div>
+						<!-- 익스클루드 -->
+						<div class="col-sm-6 form-group">
+							<!-- 추가단위 -->
+							<div class="clude-item clearfix">
+								<h4 class="clude-hd"><span style="background:#daedf3">Depart Exclude</span></h4>
+								<div class="input-bx">
+									<div class="input-daterange input-group">
+                                        <label for="" class="fs10">Travel from</label>
+										<input type="text" class="input-sm form-control" name="" />
+										<span class="input-group-addon pt20">~</span>
+                                        <label for="" class="fs10">Travel to</label>
+										<input type="text" class="input-sm form-control" name="" />
+									</div>
+								</div>
+								<div class="btn-bx">
+									<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+									<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+								</div>
+							</div>
+							<div class="pt10">
+								<label class="checkbox-inline">
+									<input type="checkbox"> Add Arrival
+								</label>
+							</div>
+							<!-- Add Arrival 체크시 -->
+							<!-- 추가단위 -->
+							<div class="clude-item clearfix">
+								<h4 class="clude-hd"><span style="background:#daedf3">Arrival Exclude</span></h4>
+								<div class="input-bx">
+									<div class="input-daterange input-group">
+                                        <label for="" class="fs10">Travel from</label>
+										<input type="text" class="input-sm form-control" name="" />
+										<span class="input-group-addon pt20">~</span>
+                                        <label for="" class="fs10">Travel to</label>
+										<input type="text" class="input-sm form-control" name="" />
+									</div>
+								</div>
+								<div class="btn-bx">
+									<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+									<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 세일스 -->
+					<div class="row">
+						<!-- 인클루드 -->
+						<div class="col-sm-6 form-group">
+							<!-- 추가단위 -->
+							<div class="clude-item clearfix">
+								<h4 class="clude-hd"><span style="background:#daedf3">Sales Include</span></h4>
+								<div class="input-bx">
+									<div class="input-daterange input-group">
+                                        <label for="" class="fs10">Travel from</label>
+										<input type="text" class="input-sm form-control" name="" />
+										<span class="input-group-addon pt20">~</span>
+                                        <label for="" class="fs10">Travel to</label>
+										<input type="text" class="input-sm form-control" name="" />
+									</div>
+								</div>
+								<div class="btn-bx">
+									<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+									<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+								</div>
+							</div>
+						</div>
+						<!-- 익스클루드 -->
+						<div class="col-sm-6 form-group">
+							<!-- 추가단위 -->
+							<div class="clude-item clearfix">
+								<h4 class="clude-hd"><span style="background:#daedf3">Sales Exclude</span></h4>
+								<div class="input-bx">
+									<div class="input-daterange input-group">
+                                        <label for="" class="fs10">Travel from</label>
+										<input type="text" class="input-sm form-control" name="" />
+										<span class="input-group-addon pt20">~</span>
+                                        <label for="" class="fs10">Travel to</label>
+										<input type="text" class="input-sm form-control" name="" />
+									</div>
+								</div>
+								<div class="btn-bx">
+									<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+									<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- 입력 테이블 -->
+			<div class="table-responsive mb10">
+				<table class="table fare-table">
+					<caption class="pa0"><span class="sr-only">Fare management setting</span></caption>
+					<thead>
+						<tr>
+							<th>Fare Source</th>
+							<th>Cabin Type</th>
+							<th>Booking Class</th>
+							<th>Fare Basis</th>
+							<th>TC/ACCT</th>
+							<th>Calculation</th>
+							<th>ADT</th>
+							<th>CHD</th>
+							<th>INF</th>
+							<th>Combi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td style="text-align:center">
+								<select class="form-control input-sm">
+									<option>GDS Publish</option>
+								</select>
+							</td>
+							<td class="text-nowrap" style="text-align:center">
+								<div class="ml10 cromleft" style="text-align:left">
+									<label class="checkbox-inline w40">
+										<input type="checkbox" checked> F
+									</label>
+									<label class="checkbox-inline w40">
+										<input type="checkbox"> C
+									</label>
+								</div>
+								<div class="mt5 ml10" style="text-align:left">
+									<label class="checkbox-inline w40">
+										<input type="checkbox"> PE
+									</label>
+									<label class="checkbox-inline w40">
+										<input type="checkbox"> Y
+									</label>
+								</div>
+							</td>
+							<td style="text-align:center">
+								<select class="form-control input-sm btn-block w90">
+									<option>All</option>
+								</select>
+								<input type="text" class="form-control input-sm btn-block text-center w90 mt5" readonly>
+							</td>
+							<td style="text-align:center">
+								<select class="form-control input-sm btn-block w90" >
+									<option style="text-align:center">All</option>
+								</select>
+								<input type="text" class="form-control input-sm btn-block text-center w90 mt5" readonly>
+							</td>
+							<td >
+								<input type="text" class="form-control input-sm w100 text-center" placeholder="Tour Code">
+								<input type="text" class="form-control input-sm w100 text-center mt5" placeholder="Account Code">
+							</td>
+							<td class="form-inline" style="text-align:center">
+								<select class="form-control input-sm w50">
+									<option>A</option>
+								</select>
+								<select class="form-control input-sm w60 select-H" readonly>
+									<option>KRW</option>
+								</select>
+								<p class="mt5"></p>
+								<select class="form-control input-sm btn-block" style="width:114px">
+									<option>Disco</option>
+								</select>
+							</td>
+							<td><input type="text" class="form-control input-sm w60 text-center" value="10,000"></td>
+							<td><input type="text" class="form-control input-sm w60 text-center" value="10,000"></td>
+							<td><input type="text" class="form-control input-sm w60 text-center" value="10,000"></td>
+							<td style="text-align:center">
+								<!-- [D] Y면 하단 라디어 버튼 출력 -->
+								<select class="form-control input-sm">
+									<option>N</option>
+								</select>
+								<div class="mt2 text-nowrap fs11" style="display:none">
+									<div>
+										<input type="radio" name="radio1" checked> Seperate
+									</div>
+									<div>
+										<input type="radio" name="radio1"> Lowest
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:center">
+								<select class="form-control input-sm">
+									<option>GDS Publish</option>
+								</select>
+							</td>
+							<td class="text-nowrap" style="text-align:center">
+								<div class="ml10" style="text-align:left">
+									<label class="checkbox-inline w40">
+										<input type="checkbox" checked> F
+									</label>
+									<label class="checkbox-inline w40">
+										<input type="checkbox"> C
+									</label>
+								</div>
+								<div class="mt5 ml10" style="text-align:left">
+									<label class="checkbox-inline w40">
+										<input type="checkbox"> PE
+									</label>
+									<label class="checkbox-inline w40">
+										<input type="checkbox"> Y
+									</label>
+								</div>
+							</td>
+							<td style="text-align:center">
+								<select class="form-control input-sm btn-block w90">
+									<option>All</option>
+								</select>
+								<input type="text" class="form-control input-sm btn-block text-center w90 mt5">
+							</td>
+							<td style="text-align:center">
+								<select class="form-control input-sm btn-block w90">
+									<option>All</option>
+								</select>
+								<input type="text" class="form-control input-sm btn-block text-center w90 mt5">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w100 text-center" placeholder="Tour Code">
+								<input type="text" class="form-control input-sm w100 text-center mt5" placeholder="Account Code">
+							</td>
+							<td class="form-inline" style="text-align:center">
+								<select class="form-control input-sm w50">
+									<option>A</option>
+								</select>
+								<select class="form-control input-sm w60 select-H"  readonly>
+									<option>KRW</option>
+								</select>
+								<p class="mt5"></p>
+								<select class="form-control input-sm btn-block" style="width:114px">
+									<option>Disco</option>
+								</select>
+							</td>
+							<td><input type="text" class="form-control input-sm w60 text-center" value="10,000"></td>
+							<td><input type="text" class="form-control input-sm w60 text-center" value="10,000"></td>
+							<td><input type="text" class="form-control input-sm w60 text-center" value="10,000"></td>
+							<td style="text-align:center">
+								<!-- [D] Y면 하단 라디어 버튼 출력 -->
+								<select class="form-control input-sm">
+									<option>Y</option>
+								</select>
+								<div class="mt2 text-nowrap fs11" style="display:block">
+									<div style="text-align:left">
+										<input type="radio" name="radio2" checked> Seperate
+									</div>
+									<div style="text-align:left">
+										<input type="radio" name="radio2"> Lowest
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="mb30 text-right">
+				<div class="btn-bx" style="position:static">
+					<button type="button"><i class="glyphicon glyphicon-plus btn-ch"></i><span class="sr-only">추가</span></button>
+					<button type="button"><i class="glyphicon glyphicon-minus btn-ch"></i><span class="sr-only">삭제</span></button>
+				</div>
+			</div>
+			<!-- 입력 -->
+			<div class="tb-style3">
+				<div class="row form-horizontal">
+					<div class="col-sm-6">
+						<h4 class="clude-hd2"><span style="background:#ffed99">Depart Flight</span></h4>
+						<div class="tb-style3">
+							<div class="row form-group mb5">
+								<label class="col-sm-4 checkbox"><input type="checkbox"> Valid on  Flights </label>
+								<div class="col-sm-8 pa0-xs">
+									<input type="text" class="form-control" placeholder="FLT e.g. KE001/KE3723">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-5 checkbox"><input type="checkbox"> Permitted C/S Flights</label>
+								<div class="col-sm-7 pt3 form-inline text-right m_leftp">
+									<span>Operating Carrier</span>
+									<input type="text" class="form-control w120">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 pt10-xs">
+						<h4 class="clude-hd2"><span style="background:#ffed99">Arrival Flight</span></h4>
+						<div class="tb-style3">
+							<div class="row form-group mb5">
+								<label class="col-sm-4 checkbox"><input type="checkbox"> Valid on  Flights </label>
+								<div class="col-sm-8 pa0-xs">
+									<input type="text" class="form-control" placeholder="FLT e.g. KE001/KE3723">
+								</div>
+							</div>
+							<div class="row form-group">
+								<label class="col-sm-5 checkbox"><input type="checkbox"> Permitted C/S Flights</label>
+								<div class="col-sm-7 pt3 form-inline text-right m_leftp">
+									<span>Operating Carrier</span>
+									<input type="text" class="form-control w120">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 입력 -->
+			<div class="bx">
+				<h4 class="h4 fs13"><img src="img/remark.png" alt="remark_icon" /> Remark</h4>
+				<form>
+					<textarea class="form-control" rows="10"></textarea>
+				</form>
+			</div>
+			<div class="text-center pa10">
+				<button type="button" class="btn bg-mint w90">SAVE</button>
+				<button type="button" class="btn bg-grey w90">CANCEL</button>
+				<button type="button" class="btn bg-orange w90">DELETE</button>
+			</div>
+		</div>
+		<!-- //content -->
+	</div>
+	<!-- //container -->
+</div>
+
+<!-- js -->
+<!--[if lt IE 9]>
+<script src="js/jquery.placeholder.js"></script>
+<script src="js/ie9.js"></script>
+<![endif]-->
+
+<script src="js/select2.full.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/icheck.min.js"></script>
+<script src="js/jpicker-1.1.6.min.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

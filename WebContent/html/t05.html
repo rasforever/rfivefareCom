@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>HNT FARE</title>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" type="text/css" href="css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="css/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="css/jPicker-1.1.6.min.css">
+<link rel="stylesheet" type="text/css" href="css/jPicker.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+
+<!-- js -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<!-- <script src="js/bootstrap.min.js"></script> -->
+<!--[if lt IE 10]>
+<script src="js/html5.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body><a href="#content" class="skip sr-only sr-only-focusable" onclick="jQuery('#content a:first').focus();return false;">Skip to Content</a>
+
+<!-- wrap -->
+<div id="wrap">
+	<!-- side -->
+	<div id="side">
+		<!-- account -->
+		<section class="account">
+			<h1 class="sr-only">account</h1>
+			<div>
+				<i class="icon-user"></i> User ID <i class="split"></i> <strong class="user">H2501</strong>
+			</div>
+		</section>
+		<!-- gnb -->
+		<nav id="gnb">
+			<h1 class="sr-only">Global Navigation Bar</h1>
+			<ul>
+				<li class="gnb1">
+					<h2>CODE MANAGEMENT</h2>
+					<ul>
+						<li><a class="i1" href="t03.html">Airline code</a></li>
+						<li><a class="i2" href="t04.html">Country code</a></li>
+						<li><a class="i3" href="t05.html">States code</a></li>
+						<li><a class="i4" href="t06.html">City code</a></li>
+						<li><a class="i5" href="t07.html">Airport code</a></li>
+						<li><a class="i6" href="t08.html">Region code</a></li>
+						<li><a class="i7" href="t09.html">Region-country connetion</a></li>
+					</ul>
+				</li>
+				<li class="gnb2">
+					<h2>SITE SETTING</h2>
+					<ul>
+						<li><a class="i1" href="t10.html">TL management</a></li>
+						<li><a class="i2" href="t11.html">Booking available date</a></li>
+						<li><a class="i3" href="t12.html">Rule management</a></li>
+						<li><a class="i4" href="t13.html">Fee management</a></li>
+						<li><a class="i5" href="t14.html">Site management</a></li>
+						<li><a class="i6" href="t15.html">Site GRP management</a></li>
+					</ul>
+				</li>
+				<li class="gnb3">
+					<h2>FARE MANAGEMENT</h2>
+					<ul>
+						<!--<li><a class="i1" href="t15.html">Commission management</a></li>-->
+						<li><a class="i2" href="t16.html">Fare management</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<!-- //side -->
+
+	<!-- container -->
+	<div id="container">
+		<!-- header -->
+		<header id="hd">
+			<a id="sideTg" class="icon-mn" href="#side" onClick="$('body').toggleClass('gnb_fold');return false;">sidebar open/close</a>
+			<h1><img class="hidden-xs" src="img/logo2.png" alt=""><img class="visible-xs" src="img/logo_m.png" alt=""><span class="sr-only">HNT FARE</span></h1>
+			<a class="icon-logout" href="#sid">logout</a>
+		</header>
+		<!-- //header -->
+		<!-- breadcrumb -->
+		<ul class="breadcrumb">
+			<li><strong>Code management</strong></li>
+			<li class="active">States code</li>
+		</ul>
+		<!-- //breadcrumb -->
+		<!-- content -->
+		<div id="content">
+			<!-- 입력 -->
+			<div class="tb-like">
+				<div class="th-contry">
+					<div class="th">States code <em class="required">*</em></div>
+					<div class="td">
+						<input type="text" class="form-control w50 input-center text-center">
+					</div>
+				</div>
+				<div>
+					<div class="th">Korean <em class="required">*</em></div>
+					<div class="td">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<div>
+					<div class="th">English <em class="required">*</em></div>
+					<div class="td">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<div>
+					<div class="th">Chinese(Simplified)</div>
+					<div class="td">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+                <div>
+					<div class="th">Language</div>
+					<div class="td">
+						<input type="text" class="form-control">
+					</div>
+				</div>
+				<div class="th-contry">
+					<div class="th">Country <em class="required">*</em></div>
+					<div class="td">
+						<input type="text" class="form-control w50 input-center text-center">
+					</div>
+				</div>
+				<div class="th-btn">
+					<div class="th">Submit</div>
+					<div class="td">
+						<button type="submit" class="btn btn-block bg-blue">SUBMIT</button>
+					</div>
+				</div>
+			</div>
+			<!-- 검색 -->
+			<div class="bx">
+				<form class="row form-inline">
+					<div class="col-sm-10">
+						<div class="form-group mr20 mr0-xs">
+							<label for="">States code</label>
+							<input type="text" class="form-control w50 text-center" id="">
+						</div>
+						<div class="form-group mr20 mr0-xs">
+							<label for="">Country code</label>
+							<input type="text" class="form-control w50 text-center" id="">
+						</div>
+						<div class="form-group">
+							<label for="">Keyword</label>
+							<input type="text" class="form-control" id="">
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<button type="submit" class="btn btn-block bg-purple">SEARCH</button>
+					</div>
+				</form>
+			</div>
+			<!-- 테이블 -->
+			<div class="table-responsive">
+				<table class="table">
+					<caption>Result : 312</caption>
+					<thead>
+						<tr>
+							<th class="th-code">States code</th>
+							<th>Korean</th>
+							<th>English</th>
+							<th>Chinese(Simplified)</th>
+							<th>Language</th>
+							<th class="th-contry">Country</th>
+							<th class="th-btn">Save</th>
+							<th class="th-btn">Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" class="form-control input-sm text-center w50">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm">
+							</td>
+							<td>
+								<input type="text" class="form-control input-sm w50 text-center">
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-mint">SAVE</button>
+							</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-orange">DELETE</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- 페이지네이션 -->
+			<div class="bx pt15 pb15 fs13">
+				<div class="row">
+					<div class="col-sm-3 pt7 pt0-xs">
+						Showing 1 to 10 of entries
+					</div>
+					<div class="col-sm-9">
+						<nav class="pagination_wrp">
+							<ul class="pagination">
+								<li><a class="direction" href="#" aria-label="First"><span aria-hidden="true">&laquo;</span></a></li>
+								<li><a class="direction" href="#">Previous</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">6</a></li>
+								<li><a class="direction" href="#">Next</a></li>
+								<li><a class="direction" href="#" aria-label="Last"><span aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //content -->
+	</div>
+	<!-- //container -->
+</div>
+
+<!-- js -->
+<!--[if lt IE 9]>
+<script src="js/jquery.placeholder.js"></script>
+<script src="js/ie9.js"></script>
+<![endif]-->
+<script src="js/select2.full.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/icheck.min.js"></script>
+<script src="js/jpicker-1.1.6.min.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>

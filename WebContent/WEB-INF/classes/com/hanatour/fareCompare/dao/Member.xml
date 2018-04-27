@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+    <select id="getLoingDataCount" parameterType="java.util.HashMap" resultType="int">
+        SELECT count(*) FROM MEMBER
+        where USE_YN = 'Y'
+		<if test="userId != ''">
+			AND MEM_ID =#{userId}
+		</if>
+		<if test="passWord != ''">
+			AND MEM_PWD =#{passWord}
+		</if>
+    </select>
+    
+    <select id="getLoingData" parameterType="java.util.HashMap" resultType="com.hanatour.fareCompare.model.MemberVo">
+        select MEM_SEQ, MEM_ID, MEM_PWD, MEM_NM, REG_DATE, USE_YN, AUTH_CD 
+        	from member 
+        WHERE USE_YN = 'Y'
+		<if test="userId != ''">
+			AND MEM_ID =#{userId}
+		</if>
+		<if test="passWord != ''">
+			AND MEM_PWD =#{passWord}
+		</if>
+    </select>
+    
+     <select id="getLoingCheck" parameterType="java.util.HashMap" resultType="int">
+        SELECT count(*) FROM MEMBER
+        where USE_YN = 'Y'
+		<if test="userId != ''">
+			AND MEM_ID =#{userId}
+		</if>
+    </select>
+    
+	<insert id="insertUserInfo" parameterType="com.hanatour.fareCompare.model.UserVo">
+    	INSERT INTO member( MEM_ID, MEM_PWD, MEM_NM, REG_DATE, USE_YN, AUTH_CD 
+		)VALUES(#{mem_id} , #{mem_pwd}  , #{mem_nm} , now() , #{use_yn} , #{auth_cd} );
+	</insert>
+ 
+</mapper>

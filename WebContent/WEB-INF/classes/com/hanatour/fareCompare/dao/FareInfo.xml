@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fareInfo">
+    <!-- /* select dual */ -->
+    <insert id="insertFareInfo" parameterType="com.hanatour.fareCompare.model.CommonFareVo">
+		INSERT INTO fareinfo(
+			MASTER_SITE_CD , SITE_CD , DEP_APO , RTN_APO, DEP_DT , RTN_DT , AIR_CD , AIR_NM 
+			, DEP_FLT_NO , RTN_FLT_NO , OIL_FEE , TAX_FEE , TASF_FEE , FARE_ADT , FARE_DIS
+			,FARE_NOMAL , FARE_NETT , VIA_CNT , EXP_DT , PROMOTION_NM , REG_DATE
+		)VALUES(
+			#{Master_SiteCd} , #{SiteCd} , #{Dep_Apo} , #{Rtn_Apo} , #{Dep_Dt} , #{Rtn_Dt}
+			, #{MkAirCd} , #{MkAirNm} , #{Dep_FltNo} , #{Rtn_FltNo} , #{Oil} , #{Tax} , #{Tasf}
+			, #{Price} , #{DisFare} , #{Fare} , #{Nett} , #{ViaCnt} , #{Exp_Dt} , #{Promo_Nm} , now()
+		)	
+	</insert>
+    <insert id="fareInfoInsert" parameterType="java.util.HashMap">
+		INSERT INTO SEARCHINFO(
+			DEP_APO , RTN_APO , AIR_CD , TRIP_TYPE, DEP_FIX_YN , CHG_MONTH , CHG_WEEK , CHG_DAY
+			, DEP_DT , CHG_RTN_DAY , ALWAYS_YN , SCH_END_DT , REG_DATE , MOD_DATE , USE_YN
+			,MEM_ID
+		)VALUES(
+			#{depApo} , #{arrApo} , #{carr} , #{tripType} , #{depFixYn} , #{chgMonth} , #{chgWeek} , #{chgDay} 
+			, #{depDt} , #{chgRtnDay} , #{alwaysYn} , #{schEndDt} , now(), now(), #{useYn} , #{userId}
+		)	
+	</insert>
+    <update id="fareInfoUpdate" parameterType="java.util.HashMap">
+		UPDATE SEARCHINFO SET 
+			DEP_APO = #{depApo} 
+			, RTN_APO = #{arrApo}
+			, AIR_CD = #{carr}
+			, TRIP_TYPE = #{tripType}
+			, DEP_FIX_YN = #{depFixYn}
+			, CHG_MONTH = #{chgMonth}
+			, CHG_WEEK = #{chgWeek}
+			, CHG_DAY = #{chgDay} 
+			, DEP_DT = #{depDt}
+			, CHG_RTN_DAY = #{chgRtnDay}
+			, ALWAYS_YN = #{alwaysYn}
+			, SCH_END_DT = #{schEndDt}
+			, REG_DATE = now()
+			, MOD_DATE = now()
+			,MEM_ID = #{userId}
+		WHERE
+			SEQ = #{seq} 
+	</update>
+    <update id="fareInfoDelete" parameterType="java.util.HashMap">
+		UPDATE SEARCHINFO SET 
+			USE_YN = #{useYn}
+			, REG_DATE = now()
+			, MOD_DATE = now()
+			,MEM_ID = #{userId}
+		WHERE
+			SEQ = #{seq} 
+	</update>
+	<select id="getFareSearchInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+ 			A.SEQ AS seq, A.DEP_APO AS depApo , A.RTN_APO AS rtnApo, A.AIR_CD AS airCd, A.TRIP_TYPE AS tripType, A.DEP_FIX_YN AS depFixYn , A.CHG_MONTH AS chgMonth , A.CHG_WEEK AS chgWeek, A.CHG_DAY AS chgDay
+			, A.DEP_DT AS depDt, A.CHG_RTN_DAY AS chgRtnDay, A.ALWAYS_YN AS alwaysYn , A.SCH_END_DT AS schEndDt , A.REG_DATE AS regDate, DATE_FORMAT(A.MOD_DATE,'%Y-%m-%d %H:%i') AS modDate , A.USE_YN AS useYn
+			, B.MEM_NM AS memNM
+		from SEARCHINFO A, MEMBER B 
+		WHERE A.MEM_ID = B.MEM_ID
+		AND A.USE_YN = 'Y'
+		<if test="depApo != ''">
+			AND A.DEP_APO =#{depApo}
+		</if>
+		<if test="arrApo != ''">
+			AND A.RTN_APO = #{rtnApo}
+		</if>
+		<if test="carr != ''">
+			AND A.AIR_CD = #{carr}
+		</if>
+		ORDER BY A.REG_DATE DESC
+ 	</select>
+	<select id="getFareUpdateInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+ 		select 
+ 			A.SEQ AS seq, A.DEP_APO AS depApo , A.RTN_APO AS rtnApo, A.AIR_CD AS airCd, A.TRIP_TYPE AS tripType, A.DEP_FIX_YN AS depFixYn , A.CHG_MONTH AS chgMonth , A.CHG_WEEK AS chgWeek, A.CHG_DAY AS chgDay
+			, A.DEP_DT AS depDt, A.CHG_RTN_DAY AS chgRtnDay, A.ALWAYS_YN AS alwaysYn , A.SCH_END_DT AS schEndDt , A.REG_DATE AS regDate, DATE_FORMAT(A.MOD_DATE,'%Y-%m-%d %H:%i') AS modDate , A.USE_YN AS useYn
+		from SEARCHINFO A 
+		WHERE A.SEQ = #{seq}
+ 	</select>
+ 	
+	<select id="getSelectSearchInfo" parameterType="java.util.HashMap" resultType="com.hanatour.fareCompare.model.FareInfoVo">
+ 		select 
+ 			A.SEQ AS seq, A.DEP_APO AS depApo , A.RTN_APO AS rtnApo, A.AIR_CD AS airCd, A.TRIP_TYPE AS tripType, A.DEP_FIX_YN AS depFixYn , A.CHG_MONTH AS chgMonth , A.CHG_WEEK AS chgWeek, A.CHG_DAY AS chgDay
+			, A.DEP_DT AS depDt, A.CHG_RTN_DAY AS chgRtnDay, A.ALWAYS_YN AS alwaysYn , A.SCH_END_DT AS schEndDt , A.REG_DATE AS regDate, DATE_FORMAT(A.MOD_DATE,'%Y-%m-%d %H:%i') AS modDate , A.USE_YN AS useYn
+		from SEARCHINFO A 
+		WHERE A.USE_YN = 'Y'
+		<if test="seq != ''">
+			AND A.SEQ = #{seq}
+		</if>
+		ORDER BY A.REG_DATE DESC
+ 	</select>
+ 	
+	<select id="getSearchInfoCnt" resultType="string">
+		SELECT 
+			COUNT(SEQ) AS SEQ_CNT 
+		FROM SEARCHINFO 
+		WHERE USE_YN = 'Y'
+	</select>
+ 
+</mapper>

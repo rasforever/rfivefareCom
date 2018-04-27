@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>HNT FARE</title>
+
+<!-- css -->
+<link rel="stylesheet" type="text/css" href="css/normalize.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker3.min.css">
+<link rel="stylesheet" type="text/css" href="css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="css/minimal/minimal.css">
+<link rel="stylesheet" type="text/css" href="css/jPicker-1.1.6.min.css">
+<link rel="stylesheet" type="text/css" href="css/jPicker.css">
+<link rel="stylesheet" type="text/css" href="css/common.css">
+
+<!-- js -->
+<script src="js/jquery-1.8.3.min.js"></script>
+<!-- <script src="js/bootstrap.min.js"></script> -->
+<!--[if lt IE 10]>
+<script src="js/html5.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body><a href="#content" class="skip sr-only sr-only-focusable" onclick="jQuery('#content a:first').focus();return false;">Skip to Content</a>
+
+<!-- wrap -->
+<div id="wrap">
+	<!-- side -->
+	<div id="side">
+		<!-- account -->
+		<section class="account">
+			<h1 class="sr-only">account</h1>
+			<div>
+				<i class="icon-user"></i> User ID <i class="split"></i> <strong class="user">H2501</strong>
+			</div>
+		</section>
+		<!-- gnb -->
+		<nav id="gnb">
+			<h1 class="sr-only">Global Navigation Bar</h1>
+			<ul>
+				<li class="gnb1">
+					<h2>CODE MANAGEMENT</h2>
+					<ul>
+						<li><a class="i1" href="t03.html">Airline code</a></li>
+						<li><a class="i2" href="t04.html">Country code</a></li>
+						<li><a class="i3" href="t05.html">States code</a></li>
+						<li><a class="i4" href="t06.html">City code</a></li>
+						<li><a class="i5" href="t07.html">Airport code</a></li>
+						<li><a class="i6" href="t08.html">Region code</a></li>
+						<li><a class="i7" href="t09.html">Region-country connetion</a></li>
+					</ul>
+				</li>
+				<li class="gnb2">
+					<h2>SITE SETTING</h2>
+					<ul>
+						<li><a class="i1" href="t10.html">TL management</a></li>
+						<li><a class="i2" href="t11.html">Booking available date</a></li>
+						<li><a class="i3" href="t12.html">Rule management</a></li>
+						<li><a class="i4" href="t13.html">Fee management</a></li>
+						<li><a class="i5" href="t14.html">Site management</a></li>
+						<li><a class="i6" href="t15.html">Site GRP management</a></li>
+					</ul>
+				</li>
+				<li class="gnb3">
+					<h2>FARE MANAGEMENT</h2>
+					<ul>
+						<!--<li><a class="i1" href="t15.html">Commission management</a></li>-->
+						<li><a class="i2" href="t16.html">Fare management</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<!-- //side -->
+
+	<!-- container -->
+	<div id="container">
+		<!-- header -->
+		<header id="hd">
+			<a id="sideTg" class="icon-mn" href="#side" onClick="$('body').toggleClass('gnb_fold');return false;">sidebar open/close</a>
+			<h1><img class="hidden-xs" src="img/logo2.png" alt=""><img class="visible-xs" src="img/logo_m.png" alt=""><span class="sr-only">HNT FARE</span></h1>
+			<a class="icon-logout" href="#sid">logout</a>
+		</header>
+		<!-- //header -->
+		<!-- breadcrumb -->
+		<ul class="breadcrumb">
+			<li><strong>Fare management</strong></li>
+			<li class="active">Fare management</li>
+		</ul>
+		<!-- //breadcrumb -->
+		<!-- content -->
+		<div id="content">
+			<!-- 검색 -->
+			<div class="bx">
+				<form>
+					<div class="row">
+						<div class="col-sm-3 form-group">
+							<label for="">Depart</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label for="">Arrival</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label for="">Date</label>
+							<select class="form-control select-W">
+								<option></option>
+							</select>
+						</div>
+						<div class="col-sm-3 form-group">							
+							<div class="input-daterange input-group">
+                                <label for="">From</label>
+								<input type="text" class="input-sm form-control" name="" />
+								<span class="input-group-addon pt20">~</span>
+                                <label for="">To&nbsp;&nbsp;</label>
+								<input type="text" class="input-sm form-control" name="" />
+							</div>
+						</div>
+						<div class="col-sm-3 form-group">
+							<label for="">Carrier</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label for="">Inputer</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label for="">Rule number</label>
+							<input type="text" class="form-control">
+						</div>
+						<div class="col-sm-3 form-group">
+							<label for="" class="dblock">Site</label>
+							<select class="form-control select-W">
+								<option>ALL</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-3 form-group pt5">
+							<span class="pr10 font-bold">Fare Type</span>
+							<label class="checkbox-inline pt1 mr10">
+								<input type="checkbox" checked> RT
+							</label>
+							<label class="checkbox-inline pt1">
+								<input type="checkbox"> OW
+							</label>
+						</div>
+						<div class="col-sm-3 form-group pt5">
+							<span class="pr10 font-bold">Open</span>
+							<label class="checkbox-inline pt1 mr10">
+								<input type="checkbox" title="yes"> Y
+							</label>
+							<label class="checkbox-inline pt1 mr10">
+								<input type="checkbox" title="no"> N
+							</label>
+                            <label class="checkbox-inline pt1">
+								<input type="checkbox" title="no"> Delete
+							</label>
+						</div>
+						<div class="col-sm-3 col-sm-offset-3">
+							<button type="button" class="btn btn-block bg-purple">SEARCH</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- 테이블 -->
+			<div class="btn-group-wrp clearfix">
+				<div class="pull-right">
+					<a class="btn bg-blue w70" href="t16_new.html">+ NEW</a>
+					<button type="button" class="btn bg-dpurple w70">OPEN</button>
+					<button type="button" class="btn bg-grey w70">CLOSE</button>
+					<button type="button" class="btn bg-orange w70">DELETE</button>
+				</div>
+			</div>
+			<div class="table-responsive pr pt10">
+				<table class="table">
+					<caption>Result : 312</caption>
+					<thead>
+						<tr>
+							<th class="th-chk"><span class="sr-only">check</span></th>
+							<th class="w50">No</th>
+							<th>Site</th>
+							<th class="w50">Open</th>
+							<th class="w50">Carrier</th>
+							<th>Title</th>
+							<th>F/T</th>
+							<th>Sale Period</th>
+							<th>Inputer</th>
+							<th>Last Modified</th>
+							<th class="th-btn">Copy</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a href="#" class="fare-link">1</a></td>
+							<td>SC000125</td>
+							<td>Y</td>
+							<td>NH</td>
+							<td>ALL TO SOUTHWEST PACIFIC C/S 3%</td>
+							<td>RT/OW/OJ</td>
+							<td>2015-10-20</td>
+							<td>H2501</td>
+							<td>2015-10-20</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-bgreen">COPY</button>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a href="#" class="fare-link">1</a></td>
+							<td>SC000125</td>
+							<td>Y</td>
+							<td>NH</td>
+							<td>ALL TO SOUTHWEST PACIFIC C/S 3%</td>
+							<td>RT/OW/OJ</td>
+							<td>2015-10-20</td>
+							<td>H2501</td>
+							<td>2015-10-20</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-bgreen">COPY</button>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox"></td>
+							<td><a href="#" class="fare-link">1</a></td>
+							<td>SC000125</td>
+							<td>Y</td>
+							<td>NH</td>
+							<td>ALL TO SOUTHWEST PACIFIC C/S 3%</td>
+							<td>RT/OW/OJ</td>
+							<td>2015-10-20</td>
+							<td>H2501</td>
+							<td>2015-10-20</td>
+							<td>
+								<button type="button" class="btn btn-sm btn-block bg-bgreen">COPY</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- 페이지네이션 -->
+			<div class="bx pt15 pb15 fs13">
+				<div class="row">
+					<div class="col-sm-3 pt7 pt0-xs">
+						Showing 1 to 10 of entries
+					</div>
+					<div class="col-sm-9">
+						<nav class="pagination_wrp">
+							<ul class="pagination">
+								<li><a class="direction" href="#" aria-label="First"><span aria-hidden="true">&laquo;</span></a></li>
+								<li><a class="direction" href="#">Previous</a></li>
+								<li class="active"><a href="#">1</a></li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">6</a></li>
+								<li><a class="direction" href="#">Next</a></li>
+								<li><a class="direction" href="#" aria-label="Last"><span aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //content -->
+	</div>
+	<!-- //container -->
+</div>
+
+<!-- js -->
+<!--[if lt IE 9]>
+<script src="js/jquery.placeholder.js"></script>
+<script src="js/ie9.js"></script>
+<![endif]-->
+<script src="js/select2.full.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+<script src="js/icheck.min.js"></script>
+<script src="js/jpicker-1.1.6.min.js"></script>
+<script src="js/common.js"></script>
+</body>
+</html>
